@@ -18,9 +18,24 @@ function App() {
       return;
     }
 
-    const generate = new Math.seedrandom(palavra.hashCode());
+    const generate = new Math.seedrandom(
+      palavra
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .hashCode()
+    );
 
-    const arr = new Array(6).fill(0).map(() => Math.ceil(60 * generate()));
+    let arr = [];
+
+    for (let i = 0; i < 6; i++) {
+      let generatedNumber;
+      do {
+        generatedNumber = Math.ceil(60 * generate());
+      } while (arr.includes(generatedNumber));
+
+      arr.push(generatedNumber);
+    }
 
     setNumbers(arr.sort((a, b) => a - b));
   };

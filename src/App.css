@@ -39,3 +39,20 @@
 .read-the-docs {
   color: #888;
 }
+
+#result {
+  margin: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.number {
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.87);
+  border-radius: 20px;
+}
+
+.button {
+  margin-left: 10px;
+}
