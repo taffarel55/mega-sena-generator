@@ -5,6 +5,7 @@ import megaSenaLogo from "./assets/logo-mega-sena.png";
 function App() {
   const [palavra, setPalavra] = useState("");
   const [numbers, setNumbers] = useState([]);
+  const [copied, setCopied] = useState(false);
 
   const handleInput = (event) => {
     setPalavra(event.target.value);
@@ -37,7 +38,15 @@ function App() {
       arr.push(generatedNumber);
     }
 
-    setNumbers(arr.sort((a, b) => a - b));
+    const orderedNumbers = arr.sort((a, b) => a - b);
+
+    setNumbers(orderedNumbers);
+
+    setCopied(true);
+    setInterval(() => {
+      navigator.clipboard.writeText(orderedNumbers);
+      setCopied(false);
+    }, 3000);
   };
 
   String.prototype.hashCode = function () {
@@ -71,7 +80,9 @@ function App() {
             </div>
           ))}
         </div>
+        {copied && <div className="text">Jogo copiado!</div>}
       </form>
+      <p className="read-the-docs">Maurício Taffarel 🄯</p>
     </div>
   );
 }
